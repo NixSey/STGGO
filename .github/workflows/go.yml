@@ -1,0 +1,38 @@
+name: Go
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  publish:
+    name: Publish for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: stggo-amd64
+            asset_name: stggo-linux-amd64
+          - os: windows-latest
+            artifact_name: stggo-amd64.exe
+            asset_name: stggo-windows-amd64
+          - os: macos-latest
+            artifact_name: stggo-macos-amd64
+            asset_name: stggo-macos-amd64
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: go build -a -o ${{ matrix.asset_name }}
+    - name: Build for Android (Arm64-v8a, Armv7l)
+      run: |
+        go build -a -o stggo-android-arm64
+        go build -a -o stggo-android-arm
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: "stggo-*" # ${{ matrix.artifact_name }}
+        asset_name: "stggo-*"
+        tag: ${{ github.ref }}
