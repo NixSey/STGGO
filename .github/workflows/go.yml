@@ -1,4 +1,4 @@
-name: Go
+name: Go Build
 
 on:
   push:
@@ -27,8 +27,8 @@ jobs:
       run: go build -a -o ${{ matrix.asset_name }}
     - name: Build for Android (Arm64-v8a, Armv7l)
       run: |
-        go build -a -o stggo-android-arm64
-        go build -a -o stggo-android-arm
+        env GOOS=android GOARCH=arm64 go build -a -o stggo-android-arm64
+        env GOOS=android GOARCH=arm go build -a -o stggo-android-arm
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
