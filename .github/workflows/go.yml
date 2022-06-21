@@ -1,9 +1,11 @@
 name: Go Build
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - '*'
+
 jobs:
   publish:
     name: Publish for ${{ matrix.os }}
