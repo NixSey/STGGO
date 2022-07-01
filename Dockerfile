@@ -7,4 +7,5 @@ RUN tar xvf go*.linux-amd64.tar.gz &> /dev/null
 RUN chown -R root:root ./go &> /dev/null
 RUN mv go /usr/local &> /dev/null
 RUN echo "export GOROOT=\$HOME/go\nexport GOPATH=\$HOME/work\nexport PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin" >> ~/.profile
+RUN source ~/.profile
 RUN printf "500" | go run main.go
