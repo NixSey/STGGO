@@ -4,6 +4,4 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-      target: dev
-    volumes:
-      - .:/dev/null
+      target: kontol
