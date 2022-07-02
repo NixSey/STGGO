@@ -7,24 +7,22 @@
 
 or
 
-`go run main-cli.go <threads>`
+`go run main-cli.go <threads>` (CLI Version).
 
 ### Build-Only
 `go build -o stggo`
 
 or
 
-`go build <filename>.go`
+`go build main-cli.go` (CLI Version).
 
 then
 
-`./<filename> <threads>`
+`./sggo`
 
 or
 
-`<filename>.exe <threads>` (Windows).
-
-#### Note: Remove < > Instead.
+`./main-cli <threads>` (CLI Version).
 
 # LICENSE
 [GNU General Public License 3](LICENSE)
