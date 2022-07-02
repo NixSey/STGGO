@@ -5,3 +5,5 @@ services:
       dockerfile: Dockerfile
       context: .
       target: kontol
+    volumes:
+      - .:/ppk
