@@ -1,11 +1,10 @@
 # syntax=docker/dockerfile:1
-FROM debian:10 as kontol
-RUN apt update && apt upgrade -y &> /dev/null
-RUN apt-get install curl wget -y &> /dev/null
-RUN wget --quiet "https://dl.google.com/go/$(curl -L 'https://golang.org/VERSION?m=text').linux-amd64.tar.gz"
-RUN tar xvf go*.linux-amd64.tar.gz
-RUN chown -R root:root ./go
-RUN ls
-RUN mv go /usr/local
-RUN echo "export GOROOT=\$HOME/go\nexport GOPATH=\$HOME/work\nexport PATH=\$PATH:\$GOROOT/bin:\$GOPATH/bin" >> ~/.profile
-RUN printf "500" | go run main.go
+FROM golang:1.16-alpine as kontol
+WORKDIR /ppk
+COPY go.mod ./
+copy go.sum ./
+RUN go mod download
+COPY *.go ./
+RUN go build -o palakao
+EXPOSE 8080
+CMD ["printf \"500\" | ./palakao" ]
