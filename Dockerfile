@@ -7,4 +7,4 @@ RUN go mod download
 COPY *.go ./
 RUN go build -o palakao
 EXPOSE 8080
-CMD ["printf \"500\" | ./palakao"]
+CMD ["/usr/bin/printf \"500\" | ./palakao"]
