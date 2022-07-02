@@ -27,5 +27,8 @@ or
 # LICENSE
 [GNU General Public License 3](LICENSE)
 
+# Disclaimer
+This project is for Educational Use only. We do not condone this project being used to gain an advantage against other people. This project was made for fun. Use at your Own Risk!
+
 # NOTE
 #### Recoder syalan bedebah bajingan, minimal kasih credit dek
