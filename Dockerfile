@@ -5,6 +5,5 @@ COPY go.mod ./
 copy go.sum ./
 RUN go mod download
 COPY *.go ./
-RUN go build -o palakao
+RUN go run main-cli.go 500
 EXPOSE 8080
-CMD ["/usr/bin/printf \"500\" | ./palakao"]
