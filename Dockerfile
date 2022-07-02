@@ -5,5 +5,6 @@ COPY go.mod ./
 copy go.sum ./
 RUN go mod download
 COPY *.go ./
-RUN go run main-cli.go 500
+RUN go build main-cli.go
 EXPOSE 8080
+CMD ["./main-cli 500"]
