@@ -7,14 +7,24 @@
 
 or
 
-`go run main-cli.go <thread>`
+`go run main-cli.go <threads>`
 
 ### Build-Only
 `go build -o stggo`
 
 or
 
-`go build <filename>` <-- Auto Generate Output Name by Go.
+`go build <filename>.go`
+
+then
+
+`./<filename> <threads>`
+
+or
+
+`<filename>.exe <threads>` (Windows).
+
+#### Note: Remove < > Instead.
 
 # LICENSE
 [GNU General Public License 3](LICENSE)
