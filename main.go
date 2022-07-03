@@ -72,29 +72,25 @@ func pr(text string) {
 }
 
 func req(url string) {
-	for {
-		client := &http.Client{}
-		var p int = generateRandomNumber(9)
-		k, _ := uuid.NewRandom()
-		l := strings.Replace(k.String(), "-", "", -1)
-		js := map[string]interface{}{"Id": p, "DeviceId": l, "Version": "0.37", "FacebookId": "", "GoogleId": "", "AdvertisingId": ""}
-		jsonv, _ := json.Marshal(js)
-		re, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonv))
-		re.Header.Set("Host", "kitkabackend.eastus.cloudapp.azure.com:5010")
-		re.Header.Set("User-Agent", "")
-		re.Header.Set("Connection", "")
-		re.Header.Set("Content-Type", "application/json")
-		re.Header.Set("use_response_compression", "true")
-		res, err := client.Do(re)
-		if err == nil {
-			body, _ := ioutil.ReadAll(res.Body)
-			if res.StatusCode == 200 {
-				pr(string(body))
-			}
-			defer res.Body.Close()
-		} else {
-			req(url)
+	client := &http.Client{}
+	var p int = generateRandomNumber(9)
+	k, _ := uuid.NewRandom()
+	l := strings.Replace(k.String(), "-", "", -1)
+	js := map[string]interface{}{"Id": p, "DeviceId": l, "Version": "0.37", "FacebookId": "", "GoogleId": "", "AdvertisingId": ""}
+	jsonv, _ := json.Marshal(js)
+	re, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonv))
+	re.Header.Set("Host", "kitkabackend.eastus.cloudapp.azure.com:5010")
+	re.Header.Set("User-Agent", "")
+	re.Header.Set("Connection", "")
+	re.Header.Set("Content-Type", "application/json")
+	re.Header.Set("use_response_compression", "true")
+	res, err := client.Do(re)
+	if err == nil {
+		body, _ := ioutil.ReadAll(res.Body)
+		if res.StatusCode == 200 {
+			pr(string(body))
 		}
+		defer res.Body.Close()
 	}
 }
 
